@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Landing Page</title>
+<title>APEX ATHLETE | Blue & Black Theme</title>
 
 <style>
 *{
@@ -13,14 +13,29 @@
     font-family:Arial, sans-serif;
 }
 
-body{
-    background:#f5f7fa;
+/* GLOBAL THEME TRANSITION */
+body, .hero, nav, .logo, nav ul li, .left h1, .left h3, .left p, .btn1, .btn2, .right img {
+    transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
+body{
+    background:#0a0f1f;  /* deep black-blue background base */
+    transition: background 0.3s, color 0.2s;
+}
+
+/* LIGHT THEME (default) - will be toggled via class, but we start with DARK theme as requested: blue/black */
+/* But requirement: "transfer website colour to blue with black background" — so default dark mode is black + blue accents.
+   Then theme changer toggles to a light mode (clean white/light blue) */
+body.light-theme {
+    background: #f0f4fc;
+}
+
+/* Hero section background adapts */
 .hero{
     width:100%;
     min-height:100vh;
     padding:40px 8%;
+    background: transparent; /* inherit body bg */
 }
 
 nav{
@@ -33,7 +48,12 @@ nav{
 .logo{
     font-size:28px;
     font-weight:bold;
-    color:#2d3559;
+    color: #3b82f6;  /* electric blue for dark theme */
+    transition: color 0.2s;
+}
+
+body.light-theme .logo {
+    color: #1e40af; /* deep blue for light mode */
 }
 
 nav ul{
@@ -44,12 +64,20 @@ nav ul{
 
 nav ul li{
     cursor:pointer;
-    color:#333;
+    color: #cbd5e1;  /* soft grey-blue on dark bg */
     transition:.3s;
 }
 
+body.light-theme nav ul li {
+    color: #1f2937;
+}
+
 nav ul li:hover{
-    color:#ff4d4d;
+    color: #60a5fa;  /* brighter blue hover on dark */
+}
+
+body.light-theme nav ul li:hover {
+    color: #2563eb;
 }
 
 .content{
@@ -65,43 +93,81 @@ nav ul li:hover{
 
 .left h1{
     font-size:70px;
-    color:#2d3559;
+    color: #3b82f6;   /* vibrant blue for dark */
     margin-bottom:15px;
+}
+
+body.light-theme .left h1 {
+    color: #1e3a8a;
 }
 
 .left h3{
     font-size:28px;
-    color:#666;
+    color: #94a3b8;   /* cool grey-blue on dark */
     margin-bottom:20px;
 }
 
+body.light-theme .left h3 {
+    color: #4b5563;
+}
+
 .left p{
-    color:#777;
+    color: #9ca3af;   /* light greyish for readability on black background */
     font-size:18px;
     line-height:1.7;
     max-width:500px;
     margin-bottom:30px;
 }
 
+body.light-theme .left p {
+    color: #374151;
+}
+
 .btn1{
-    background:#ff4d4d;
+    background:#2563eb;   /* strong blue button */
     color:white;
     border:none;
     padding:15px 35px;
     border-radius:30px;
     cursor:pointer;
     font-size:16px;
+    transition: 0.2s;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+}
+
+.btn1:hover {
+    background: #1d4ed8;
+    transform: scale(1.02);
 }
 
 .btn2{
-    background:white;
-    color:#ff4d4d;
-    border:2px solid #ff4d4d;
+    background:transparent;
+    color:#3b82f6;
+    border:2px solid #3b82f6;
     padding:15px 35px;
     border-radius:30px;
     cursor:pointer;
     font-size:16px;
     margin-left:15px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn2:hover {
+    background: rgba(59,130,246,0.1);
+    border-color: #60a5fa;
+    color: #60a5fa;
+}
+
+body.light-theme .btn2 {
+    color: #2563eb;
+    border-color: #2563eb;
+}
+body.light-theme .btn2:hover {
+    background: rgba(37,99,235,0.08);
+    color: #1e40af;
+    border-color: #1e40af;
 }
 
 .right{
@@ -114,52 +180,120 @@ nav ul li:hover{
     width:600px;
     max-width:100%;
     height:auto;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.4));
+    transition: filter 0.2s;
 }
 
-/* Mobile */
+body.light-theme .right img {
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.1));
+}
 
+/* THEME TOGGLE BUTTON STYLES - positioned nicely */
+.theme-toggle {
+    background: #1e293b;
+    border: none;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.2s;
+    margin-left: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    color: #facc15; /* sun icon color */
+}
+
+body.light-theme .theme-toggle {
+    background: #e2e8f0;
+    color: #1e293b;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    background: #334155;
+}
+
+body.light-theme .theme-toggle:hover {
+    background: #cbd5e1;
+}
+
+/* Responsive adjustments for toggle button */
 @media(max-width:900px){
-
     .content{
         flex-direction:column-reverse;
         text-align:center;
         gap:30px;
     }
-
     .left,
     .right{
         width:100%;
     }
-
     .left h1{
         font-size:50px;
     }
-
     nav{
         flex-direction:column;
         gap:20px;
     }
-
     nav ul{
         gap:20px;
     }
+    .theme-toggle {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
 }
-</style>
 
+/* keep nav items aligned, add wrapper for theme button */
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* adjustment for mobile: ensure layout remains consistent */
+@media (max-width: 900px) {
+    nav {
+        flex-direction: column;
+    }
+    .nav-wrapper {
+        margin-top: 5px;
+        justify-content: center;
+    }
+    .theme-toggle {
+        margin-left: 0;
+    }
+}
+
+</style>
 </head>
-<body>
+<body class="dark-theme"> <!-- default dark theme (black background & blue accents) -->
 
 <section class="hero">
 
     <nav>
         <div class="logo">APEX ATHLETE</div>
-
-        <ul>
-            <li>Home</li>
-            <li>Programs</li>
-            <li>Services</li>
-            <li>Contact</li>
-        </ul>
+        <div class="nav-wrapper">
+            <ul>
+                <li>Home</li>
+                <li>Programs</li>
+                <li>Services</li>
+                <li>Contact</li>
+            </ul>
+            <!-- Dark/Light theme toggle button -->
+            <button class="theme-toggle" id="themeToggleBtn" aria-label="Switch theme">
+                🌙
+            </button>
+        </div>
     </nav>
 
     <div class="content">
@@ -179,12 +313,74 @@ nav ul li:hover{
         </div>
 
         <div class="right">
-            <img src="img/2201_w020_n001_1251a_p30_1251-removebg-preview.png" alt="">
+            <img src="img/2201_w020_n001_1251a_p30_1251-removebg-preview.png" alt="Athlete illustration">
         </div>
 
     </div>
 
 </section>
+
+<script>
+    // THEME TOGGLE LOGIC: Switching between DARK (blue on black background) and LIGHT (clean blue/white)
+    // According to requirement: "add dark theme light theme changer button and transfer website colour to blue with black background"
+    // So by default we have black background with blue accents (dark mode). Clicking toggles to light theme with subtle blue/grey.
+    // I will use body class "light-theme" to switch.
+    
+    const toggleBtn = document.getElementById('themeToggleBtn');
+    const currentTheme = localStorage.getItem('apexTheme');
+    
+    // Function to update button icon based on theme
+    function updateButtonIcon(isLight) {
+        if (isLight) {
+            toggleBtn.innerHTML = '☀️';   // Sun icon for light mode (indicating click to go dark)
+            toggleBtn.style.color = '#f59e0b';
+        } else {
+            toggleBtn.innerHTML = '🌙';   // Moon icon for dark mode (click to go light)
+            toggleBtn.style.color = '#facc15';
+        }
+    }
+    
+    // Apply theme
+    function setTheme(themeName) {
+        if (themeName === 'light') {
+            document.body.classList.add('light-theme');
+            localStorage.setItem('apexTheme', 'light');
+            updateButtonIcon(true);
+        } else {
+            document.body.classList.remove('light-theme');
+            localStorage.setItem('apexTheme', 'dark');
+            updateButtonIcon(false);
+        }
+    }
+    
+    // Initialize theme based on localStorage or default dark (black background & blue)
+    if (currentTheme === 'light') {
+        setTheme('light');
+    } else {
+        // default dark mode (blue with black background)
+        setTheme('dark');
+    }
+    
+    // Toggle functionality
+    toggleBtn.addEventListener('click', () => {
+        const isLightTheme = document.body.classList.contains('light-theme');
+        if (isLightTheme) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+    });
+    
+    // Bonus: add subtle hover effect for interactive elements consistency, but keeping original behavior.
+    // All original functionality (buttons, layout) remains unchanged besides color palette migration.
+    // The image src remains same path, no modifications.
+    // Also ensure that any unmodified elements adapt properly. 
+    // Additionally, any missing image fallback won't break layout.
+    // For robustness, if image fails to load, alt text appears but no other changes.
+    
+    // Optional: small console feedback for theme switch (non-intrusive)
+    console.log('Theme toggler ready — Blue & Black theme default, with light mode option');
+</script>
 
 </body>
 </html>
