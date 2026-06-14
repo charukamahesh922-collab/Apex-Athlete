@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APEX ATHLETE | Animated Performance</title>
+<title>APEX ATHLETE | Elite Performance Training</title>
 
 <style>
 *{
@@ -14,15 +14,15 @@
 }
 
 /* Import Google Fonts for modern look */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
 /* GLOBAL THEME TRANSITION */
-body, .hero, nav, .logo, nav ul li, .left h1, .left h3, .left p, .btn1, .btn2, .right img {
-    transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s ease;
+body, .hero, nav, .logo, nav ul li, .left h1, .left h3, .left p, .btn1, .btn2, .right img, .feature-card, .testimonial-card, .stat-card {
+    transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s ease, transform 0.3s ease;
 }
 
 body{
-    background:#0a0f1f;  /* deep black-blue background base */
+    background:#0a0f1f;
     transition: background 0.3s, color 0.2s;
     overflow-x: hidden;
 }
@@ -32,7 +32,6 @@ body.light-theme {
     background: #f0f4fc;
 }
 
-/* Hero section background adapts */
 .hero{
     width:100%;
     min-height:100vh;
@@ -42,75 +41,43 @@ body.light-theme {
 
 /* ========== ANIMATION KEYFRAMES ========== */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(60px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(60px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes glowPulse {
-    0% {
-        filter: drop-shadow(0 0 5px rgba(59,130,246,0.3)) drop-shadow(0 8px 20px rgba(0,0,0,0.4));
-        transform: scale(1) rotate(0deg);
-    }
-    50% {
-        filter: drop-shadow(0 0 20px rgba(59,130,246,0.7)) drop-shadow(0 12px 28px rgba(0,0,0,0.5));
-        transform: scale(1.02) rotate(1deg);
-    }
-    100% {
-        filter: drop-shadow(0 0 5px rgba(59,130,246,0.3)) drop-shadow(0 8px 20px rgba(0,0,0,0.4));
-        transform: scale(1) rotate(0deg);
-    }
+    0% { filter: drop-shadow(0 0 5px rgba(59,130,246,0.3)) drop-shadow(0 8px 20px rgba(0,0,0,0.4)); transform: scale(1) rotate(0deg); }
+    50% { filter: drop-shadow(0 0 20px rgba(59,130,246,0.7)) drop-shadow(0 12px 28px rgba(0,0,0,0.5)); transform: scale(1.02) rotate(1deg); }
+    100% { filter: drop-shadow(0 0 5px rgba(59,130,246,0.3)) drop-shadow(0 8px 20px rgba(0,0,0,0.4)); transform: scale(1) rotate(0deg); }
 }
 
 @keyframes floatMotion {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-15px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
 }
 
 @keyframes subtleZoom {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.03);
-    }
+    0% { transform: scale(1); }
+    100% { transform: scale(1.03); }
 }
 
-/* loading preloader animation */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* preloader animation */
 .preloader {
     position: fixed;
     top: 0;
@@ -166,38 +133,17 @@ body.light-theme .preloader {
     50% { opacity: 0.5; }
 }
 
-/* Animated elements for content */
-.animate-left {
-    animation: fadeInLeft 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
-}
+/* Animated elements */
+.animate-left { animation: fadeInLeft 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards; }
+.animate-right { animation: fadeInRight 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards; }
+.animate-up { animation: fadeInUp 0.7s ease forwards; }
 
-.animate-right {
-    animation: fadeInRight 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
-}
+.delay-1 { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; }
+.delay-2 { animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards; }
+.delay-3 { animation-delay: 0.6s; opacity: 0; animation-fill-mode: forwards; }
+.delay-4 { animation-delay: 0.8s; opacity: 0; animation-fill-mode: forwards; }
 
-.animate-up {
-    animation: fadeInUp 0.7s ease forwards;
-}
-
-.delay-1 {
-    animation-delay: 0.2s;
-    opacity: 0; /* start invisible */
-    animation-fill-mode: forwards;
-}
-
-.delay-2 {
-    animation-delay: 0.4s;
-    opacity: 0;
-    animation-fill-mode: forwards;
-}
-
-.delay-3 {
-    animation-delay: 0.6s;
-    opacity: 0;
-    animation-fill-mode: forwards;
-}
-
-/* Image animation: floating + pulse glow combined */
+/* Image animation */
 .animated-image {
     animation: floatMotion 3s ease-in-out infinite, glowPulse 4s ease-in-out infinite;
     transition: all 0.3s;
@@ -209,7 +155,7 @@ body.light-theme .preloader {
     cursor: pointer;
 }
 
-/* Navbar & restyling */
+/* Navbar */
 nav{
     display:flex;
     justify-content:space-between;
@@ -223,7 +169,7 @@ nav{
 .logo{
     font-size:28px;
     font-weight:800;
-    color: #3b82f6;  /* electric blue */
+    color: #3b82f6;
     letter-spacing: 1px;
     transition: color 0.2s;
     background: linear-gradient(135deg, #3b82f6, #60a5fa);
@@ -234,8 +180,6 @@ nav{
 
 body.light-theme .logo {
     color: #1e40af;
-    background: none;
-    -webkit-background-clip: unset;
 }
 
 nav ul{
@@ -267,10 +211,6 @@ nav ul li:hover::after {
     width: 100%;
 }
 
-body.light-theme nav ul li::after {
-    background: #2563eb;
-}
-
 nav ul li:hover{
     color: #60a5fa;
 }
@@ -278,7 +218,6 @@ nav ul li:hover{
 body.light-theme nav ul li {
     color: #1f2937;
 }
-
 body.light-theme nav ul li:hover {
     color: #2563eb;
 }
@@ -289,6 +228,7 @@ body.light-theme nav ul li:hover {
     align-items:center;
     justify-content:space-between;
     gap: 30px;
+    margin-bottom: 60px;
 }
 
 .left{
@@ -387,16 +327,6 @@ body.light-theme .left p {
     transform: translateY(-3px);
 }
 
-body.light-theme .btn2 {
-    color: #2563eb;
-    border-color: #2563eb;
-}
-body.light-theme .btn2:hover {
-    background: rgba(37,99,235,0.08);
-    color: #1e40af;
-    border-color: #1e40af;
-}
-
 .right{
     width:50%;
     display:flex;
@@ -411,7 +341,7 @@ body.light-theme .btn2:hover {
     transition: transform 0.3s, filter 0.3s;
 }
 
-/* THEME TOGGLE BUTTON STYLES */
+/* Theme Toggle */
 .theme-toggle {
     background: #1e293b;
     border: none;
@@ -432,7 +362,6 @@ body.light-theme .btn2:hover {
 body.light-theme .theme-toggle {
     background: #e2e8f0;
     color: #1e293b;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .theme-toggle:hover {
@@ -440,14 +369,293 @@ body.light-theme .theme-toggle {
     background: #334155;
 }
 
-body.light-theme .theme-toggle:hover {
-    background: #cbd5e1;
-}
-
 .nav-wrapper {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+/* ========== NEW SECTIONS ========== */
+
+/* Stats Section */
+.stats-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 60px 0;
+    padding: 40px 0;
+    border-top: 1px solid rgba(59,130,246,0.2);
+    border-bottom: 1px solid rgba(59,130,246,0.2);
+}
+
+.stat-card {
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+    padding: 20px;
+    background: rgba(59,130,246,0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    background: rgba(59,130,246,0.1);
+}
+
+.stat-number {
+    font-size: 48px;
+    font-weight: 800;
+    color: #3b82f6;
+    display: block;
+}
+
+.stat-label {
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+body.light-theme .stat-label {
+    color: #4b5563;
+}
+
+/* Features Section */
+.features-section {
+    margin: 60px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 800;
+    color: #3b82f6;
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #94a3b8;
+    margin-bottom: 50px;
+    font-size: 18px;
+}
+
+body.light-theme .section-subtitle {
+    color: #4b5563;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: rgba(59,130,246,0.05);
+    border-radius: 24px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s;
+    border: 1px solid rgba(59,130,246,0.1);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    background: rgba(59,130,246,0.1);
+    border-color: rgba(59,130,246,0.3);
+    box-shadow: 0 20px 30px -15px rgba(59,130,246,0.2);
+}
+
+.feature-icon {
+    font-size: 52px;
+    margin-bottom: 20px;
+}
+
+.feature-card h4 {
+    color: #cbd5e1;
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+body.light-theme .feature-card h4 {
+    color: #1f2937;
+}
+
+.feature-card p {
+    color: #9ca3af;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+body.light-theme .feature-card p {
+    color: #4b5563;
+}
+
+/* Testimonials */
+.testimonials-section {
+    margin: 60px 0;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.testimonial-card {
+    background: rgba(59,130,246,0.05);
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.3s;
+    border: 1px solid rgba(59,130,246,0.1);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    background: rgba(59,130,246,0.08);
+}
+
+.testimonial-text {
+    color: #cbd5e1;
+    font-size: 15px;
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+body.light-theme .testimonial-text {
+    color: #374151;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.author-info h5 {
+    color: #3b82f6;
+    font-size: 16px;
+    margin-bottom: 3px;
+}
+
+.author-info p {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+body.light-theme .author-info p {
+    color: #6b7280;
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(37,99,235,0.05));
+    border-radius: 30px;
+    padding: 60px 40px;
+    text-align: center;
+    margin: 60px 0;
+    border: 1px solid rgba(59,130,246,0.2);
+}
+
+.cta-section h3 {
+    font-size: 36px;
+    color: #3b82f6;
+    margin-bottom: 20px;
+}
+
+.cta-section p {
+    color: #94a3b8;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+body.light-theme .cta-section p {
+    color: #4b5563;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Footer */
+.footer {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(59,130,246,0.2);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+.footer-col h4 {
+    color: #3b82f6;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.footer-col p, .footer-col a {
+    color: #94a3b8;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 12px;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.footer-col a:hover {
+    color: #60a5fa;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(59,130,246,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.social-icon:hover {
+    background: #3b82f6;
+    transform: translateY(-3px);
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 40px;
+    padding-bottom: 20px;
+    color: #94a3b8;
+    font-size: 12px;
 }
 
 /* Responsive */
@@ -457,8 +665,7 @@ body.light-theme .theme-toggle:hover {
         text-align:center;
         gap:30px;
     }
-    .left,
-    .right{
+    .left, .right{
         width:100%;
     }
     .left h1{
@@ -480,18 +687,21 @@ body.light-theme .theme-toggle:hover {
         flex-direction: column;
         gap: 12px;
     }
-    .left p {
-        max-width: 100%;
+    .stats-section {
+        flex-direction: column;
     }
-    .btn1, .btn2 {
-        margin: 8px 6px;
+    .section-title {
+        font-size: 32px;
+    }
+    .cta-section h3 {
+        font-size: 28px;
     }
 }
 </style>
 </head>
 <body>
 
-<!-- PRELOADER ANIMATION -->
+<!-- PRELOADER -->
 <div class="preloader" id="preloader">
     <div class="loader">
         <div class="loader-circle"></div>
@@ -510,60 +720,173 @@ body.light-theme .theme-toggle:hover {
                 <li>Services</li>
                 <li>Contact</li>
             </ul>
-            <button class="theme-toggle" id="themeToggleBtn" aria-label="Switch theme">
-                🌙
-            </button>
+            <button class="theme-toggle" id="themeToggleBtn" aria-label="Switch theme">🌙</button>
         </div>
     </nav>
 
     <div class="content">
-
         <div class="left">
             <h1 class="animate-left">APEX ATHLETE</h1>
-
             <h3 class="animate-left delay-1">Train Like A Champion</h3>
-
             <p class="animate-left delay-2">
                 Improve your speed, endurance and athletic performance
                 with professional training programs designed for athletes.
             </p>
-
             <div class="animate-left delay-3">
-                <button class="btn1">Get Started</button>
-                <button class="btn2">Learn More</button>
+                <button class="btn1" id="getStartedBtn">Get Started</button>
+                <button class="btn2" id="learnMoreBtn">Learn More</button>
             </div>
         </div>
-
         <div class="right animate-right">
-            <img class="animated-image" src="img/2201_w020_n001_1251a_p30_1251-removebg-preview.png" alt="Dynamic athlete illustration - Speed & Agility">
+            <img class="animated-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%233b82f6'/%3E%3Ccircle cx='200' cy='200' r='120' fill='white' opacity='0.2'/%3E%3Ctext x='200' y='220' font-size='40' text-anchor='middle' fill='white' font-weight='bold'%3EATHLETE%3C/text%3E%3C/svg%3E" alt="Dynamic athlete illustration - Speed & Agility">
         </div>
+    </div>
 
+    <!-- Stats Section -->
+    <div class="stats-section animate-up delay-1">
+        <div class="stat-card">
+            <span class="stat-number" data-count="5000">0</span>
+            <span class="stat-label">HAPPY ATHLETES</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" data-count="150">0</span>
+            <span class="stat-label">EXPERT COACHES</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" data-count="98">0</span>
+            <span class="stat-label">SUCCESS RATE</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" data-count="25">0</span>
+            <span class="stat-label">COUNTRIES</span>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features-section">
+        <h2 class="section-title animate-up delay-1">Why Choose Us</h2>
+        <p class="section-subtitle animate-up delay-2">Elite training programs designed for peak performance</p>
+        <div class="features-grid">
+            <div class="feature-card animate-up delay-1">
+                <div class="feature-icon">🏃</div>
+                <h4>Speed Training</h4>
+                <p>Advanced sprint techniques and agility drills to maximize your acceleration and quickness.</p>
+            </div>
+            <div class="feature-card animate-up delay-2">
+                <div class="feature-icon">💪</div>
+                <h4>Strength Building</h4>
+                <p>Targeted strength programs using scientific methods to build functional athletic power.</p>
+            </div>
+            <div class="feature-card animate-up delay-3">
+                <div class="feature-icon">🧘</div>
+                <h4>Recovery Protocol</h4>
+                <p>Cutting-edge recovery techniques including cryotherapy and mobility optimization.</p>
+            </div>
+            <div class="feature-card animate-up delay-4">
+                <div class="feature-icon">📊</div>
+                <h4>Performance Analytics</h4>
+                <p>Data-driven insights with video analysis and biometric tracking for measurable results.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonials-section">
+        <h2 class="section-title animate-up">Athlete Voices</h2>
+        <p class="section-subtitle">Real stories from champions we've trained</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Apex transformed my career. In just 6 months, I shaved 0.3 seconds off my 40-yard dash and gained 15lbs of lean muscle."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JD</div>
+                    <div class="author-info">
+                        <h5>James Donovan</h5>
+                        <p>Professional Sprinter</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The recovery protocols alone are worth it. I've never felt better during competition season. Top-notch coaching staff!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SR</div>
+                    <div class="author-info">
+                        <h5>Sarah Rivera</h5>
+                        <p>Olympic Trials Qualifier</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Best decision I ever made. The community and accountability at Apex pushed me beyond my limits."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MT</div>
+                    <div class="author-info">
+                        <h5>Marcus Thompson</h5>
+                        <p>College Athlete</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section animate-up">
+        <h3>Ready to Elevate Your Game?</h3>
+        <p>Join the premier athletic training community and unlock your full potential.</p>
+        <div class="cta-buttons">
+            <button class="btn1">Start Free Trial</button>
+            <button class="btn2">View Programs</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-col">
+            <h4>APEX ATHLETE</h4>
+            <p>Elite performance training for serious athletes who want to dominate their sport.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <a href="#">About Us</a>
+            <a href="#">Programs</a>
+            <a href="#">Facilities</a>
+            <a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+            <h4>Support</h4>
+            <a href="#">Help Center</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+        </div>
+        <div class="footer-col">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+                <div class="social-icon">📘</div>
+                <div class="social-icon">📷</div>
+                <div class="social-icon">🐦</div>
+                <div class="social-icon">🎵</div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        © 2026 APEX ATHLETE | Train Like A Champion
     </div>
 
 </section>
 
 <script>
-    // ========== PRELOADER LOGIC + PAGE LOAD ANIMATION ==========
+    // Preloader
     window.addEventListener('load', function() {
         const preloader = document.getElementById('preloader');
         if (preloader) {
             setTimeout(() => {
                 preloader.classList.add('hide');
-                // after preloader hidden, ensure body scroll is visible
                 document.body.style.overflow = 'auto';
-            }, 1200); // show preloader for 1.2 sec for dramatic effect
+            }, 1200);
         }
-        
-        // additional: make sure any elements with opacity animation start properly
-        const animatedLefts = document.querySelectorAll('.animate-left, .animate-right');
-        animatedLefts.forEach(el => {
-            if (el.style.opacity !== '0') {
-                // ensure they get animation styles; pre-existing inline not required
-            }
-        });
+        startCounters();
     });
 
-    // If there is any flash of preloader background, ensure final removal
     document.body.style.overflow = 'hidden';
     window.addEventListener('load', () => {
         setTimeout(() => {
@@ -571,17 +894,35 @@ body.light-theme .theme-toggle:hover {
         }, 1300);
     });
 
-    // ========== THEME TOGGLE LOGIC ==========
+    // Counter animation for stats
+    function startCounters() {
+        const counters = document.querySelectorAll('.stat-number');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-count'));
+            let current = 0;
+            const increment = target / 50;
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    counter.innerText = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCounter();
+        });
+    }
+
+    // Theme toggle
     const toggleBtn = document.getElementById('themeToggleBtn');
     const currentTheme = localStorage.getItem('apexTheme');
     
     function updateButtonIcon(isLight) {
         if (isLight) {
             toggleBtn.innerHTML = '☀️';
-            toggleBtn.style.color = '#f59e0b';
         } else {
             toggleBtn.innerHTML = '🌙';
-            toggleBtn.style.color = '#facc15';
         }
     }
     
@@ -605,40 +946,26 @@ body.light-theme .theme-toggle:hover {
     
     toggleBtn.addEventListener('click', () => {
         const isLightTheme = document.body.classList.contains('light-theme');
-        if (isLightTheme) {
-            setTheme('dark');
-        } else {
-            setTheme('light');
-        }
+        setTheme(isLightTheme ? 'dark' : 'light');
     });
-    
-    // Additional hover animations for image & visual enhancement
-    const heroImg = document.querySelector('.right img');
-    if (heroImg) {
-        heroImg.addEventListener('mouseenter', () => {
-            heroImg.style.transition = 'transform 0.25s';
-        });
-        heroImg.addEventListener('mouseleave', () => {
-            heroImg.style.transform = 'scale(1)';
-        });
-    }
-    
-    // Add parallax or micro interactivity to buttons
+
+    // Button interactions
     const btns = document.querySelectorAll('.btn1, .btn2');
     btns.forEach(btn => {
-        btn.addEventListener('mousedown', () => {
-            btn.style.transform = 'scale(0.97)';
-        });
-        btn.addEventListener('mouseup', () => {
-            btn.style.transform = 'translateY(-3px)';
-        });
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'translateY(0)';
+        btn.addEventListener('mousedown', () => btn.style.transform = 'scale(0.97)');
+        btn.addEventListener('mouseup', () => btn.style.transform = 'translateY(-3px)');
+        btn.addEventListener('mouseleave', () => btn.style.transform = 'translateY(0)');
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('nav ul li').forEach(li => {
+        li.addEventListener('click', () => {
+            const sections = ['Home', 'Programs', 'Services', 'Contact'];
+            alert(`Navigate to ${li.innerText} section (demo)`);
         });
     });
-    
-    // Console log theme status ready
-    console.log('🔥 APEX ATHLETE: Dynamic animations & theme toggler active | Image floating animation active');
+
+    console.log('🔥 APEX ATHLETE: Enhanced landing page with stats, features, testimonials, footer');
 </script>
 </body>
 </html>
