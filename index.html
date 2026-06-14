@@ -1,17 +1,20 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APEX ATHLETE | Blue & Black Theme</title>
+<title>APEX ATHLETE | Animated Performance</title>
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family: 'Poppins', 'Arial', sans-serif;
 }
+
+/* Import Google Fonts for modern look */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 /* GLOBAL THEME TRANSITION */
 body, .hero, nav, .logo, nav ul li, .left h1, .left h3, .left p, .btn1, .btn2, .right img {
@@ -21,11 +24,10 @@ body, .hero, nav, .logo, nav ul li, .left h1, .left h3, .left p, .btn1, .btn2, .
 body{
     background:#0a0f1f;  /* deep black-blue background base */
     transition: background 0.3s, color 0.2s;
+    overflow-x: hidden;
 }
 
-/* LIGHT THEME (default) - will be toggled via class, but we start with DARK theme as requested: blue/black */
-/* But requirement: "transfer website colour to blue with black background" — so default dark mode is black + blue accents.
-   Then theme changer toggles to a light mode (clean white/light blue) */
+/* LIGHT THEME */
 body.light-theme {
     background: #f0f4fc;
 }
@@ -35,25 +37,205 @@ body.light-theme {
     width:100%;
     min-height:100vh;
     padding:40px 8%;
-    background: transparent; /* inherit body bg */
+    background: transparent;
 }
 
+/* ========== ANIMATION KEYFRAMES ========== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes glowPulse {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(59,130,246,0.3)) drop-shadow(0 8px 20px rgba(0,0,0,0.4));
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(59,130,246,0.7)) drop-shadow(0 12px 28px rgba(0,0,0,0.5));
+        transform: scale(1.02) rotate(1deg);
+    }
+    100% {
+        filter: drop-shadow(0 0 5px rgba(59,130,246,0.3)) drop-shadow(0 8px 20px rgba(0,0,0,0.4));
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes floatMotion {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes subtleZoom {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.03);
+    }
+}
+
+/* loading preloader animation */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #05070f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+body.light-theme .preloader {
+    background: #eef2ff;
+}
+
+.preloader.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    text-align: center;
+}
+
+.loader-circle {
+    width: 70px;
+    height: 70px;
+    border: 5px solid rgba(59,130,246,0.2);
+    border-top: 5px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(59,130,246,0.5);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-text {
+    color: #3b82f6;
+    font-weight: 600;
+    letter-spacing: 2px;
+    animation: blinkText 1.5s infinite;
+}
+
+@keyframes blinkText {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Animated elements for content */
+.animate-left {
+    animation: fadeInLeft 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+}
+
+.animate-right {
+    animation: fadeInRight 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+}
+
+.animate-up {
+    animation: fadeInUp 0.7s ease forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.2s;
+    opacity: 0; /* start invisible */
+    animation-fill-mode: forwards;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.delay-3 {
+    animation-delay: 0.6s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+/* Image animation: floating + pulse glow combined */
+.animated-image {
+    animation: floatMotion 3s ease-in-out infinite, glowPulse 4s ease-in-out infinite;
+    transition: all 0.3s;
+    will-change: transform;
+}
+
+.animated-image:hover {
+    animation: floatMotion 1.2s ease-in-out infinite, subtleZoom 0.5s forwards;
+    cursor: pointer;
+}
+
+/* Navbar & restyling */
 nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
     padding:20px 0;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: 0.1s;
 }
 
 .logo{
     font-size:28px;
-    font-weight:bold;
-    color: #3b82f6;  /* electric blue for dark theme */
+    font-weight:800;
+    color: #3b82f6;  /* electric blue */
+    letter-spacing: 1px;
     transition: color 0.2s;
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: #3b82f6;
 }
 
 body.light-theme .logo {
-    color: #1e40af; /* deep blue for light mode */
+    color: #1e40af;
+    background: none;
+    -webkit-background-clip: unset;
 }
 
 nav ul{
@@ -64,16 +246,37 @@ nav ul{
 
 nav ul li{
     cursor:pointer;
-    color: #cbd5e1;  /* soft grey-blue on dark bg */
+    color: #cbd5e1;
+    font-weight: 500;
     transition:.3s;
+    position: relative;
+}
+
+nav ul li::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: #3b82f6;
+    transition: width 0.3s;
+}
+
+nav ul li:hover::after {
+    width: 100%;
+}
+
+body.light-theme nav ul li::after {
+    background: #2563eb;
+}
+
+nav ul li:hover{
+    color: #60a5fa;
 }
 
 body.light-theme nav ul li {
     color: #1f2937;
-}
-
-nav ul li:hover{
-    color: #60a5fa;  /* brighter blue hover on dark */
 }
 
 body.light-theme nav ul li:hover {
@@ -85,6 +288,7 @@ body.light-theme nav ul li:hover {
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap: 30px;
 }
 
 .left{
@@ -93,8 +297,10 @@ body.light-theme nav ul li:hover {
 
 .left h1{
     font-size:70px;
-    color: #3b82f6;   /* vibrant blue for dark */
+    color: #3b82f6;
     margin-bottom:15px;
+    font-weight: 800;
+    letter-spacing: -1px;
 }
 
 body.light-theme .left h1 {
@@ -103,8 +309,9 @@ body.light-theme .left h1 {
 
 .left h3{
     font-size:28px;
-    color: #94a3b8;   /* cool grey-blue on dark */
+    color: #94a3b8;
     margin-bottom:20px;
+    font-weight: 600;
 }
 
 body.light-theme .left h3 {
@@ -112,11 +319,12 @@ body.light-theme .left h3 {
 }
 
 .left p{
-    color: #9ca3af;   /* light greyish for readability on black background */
+    color: #9ca3af;
     font-size:18px;
     line-height:1.7;
     max-width:500px;
     margin-bottom:30px;
+    font-weight: 400;
 }
 
 body.light-theme .left p {
@@ -124,21 +332,39 @@ body.light-theme .left p {
 }
 
 .btn1{
-    background:#2563eb;   /* strong blue button */
+    background:#2563eb;
     color:white;
     border:none;
     padding:15px 35px;
-    border-radius:30px;
+    border-radius:40px;
     cursor:pointer;
     font-size:16px;
-    transition: 0.2s;
+    transition: 0.25s;
     font-weight: 600;
-    box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+    box-shadow: 0 4px 15px rgba(37,99,235,0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn1:hover::before {
+    left: 100%;
 }
 
 .btn1:hover {
     background: #1d4ed8;
-    transform: scale(1.02);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(37,99,235,0.5);
 }
 
 .btn2{
@@ -146,18 +372,19 @@ body.light-theme .left p {
     color:#3b82f6;
     border:2px solid #3b82f6;
     padding:15px 35px;
-    border-radius:30px;
+    border-radius:40px;
     cursor:pointer;
     font-size:16px;
     margin-left:15px;
     font-weight: 600;
-    transition: 0.2s;
+    transition: 0.25s;
 }
 
 .btn2:hover {
     background: rgba(59,130,246,0.1);
     border-color: #60a5fa;
     color: #60a5fa;
+    transform: translateY(-3px);
 }
 
 body.light-theme .btn2 {
@@ -180,15 +407,11 @@ body.light-theme .btn2:hover {
     width:600px;
     max-width:100%;
     height:auto;
-    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.4));
-    transition: filter 0.2s;
+    border-radius: 20px;
+    transition: transform 0.3s, filter 0.3s;
 }
 
-body.light-theme .right img {
-    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.1));
-}
-
-/* THEME TOGGLE BUTTON STYLES - positioned nicely */
+/* THEME TOGGLE BUTTON STYLES */
 .theme-toggle {
     background: #1e293b;
     border: none;
@@ -203,7 +426,7 @@ body.light-theme .right img {
     transition: all 0.2s;
     margin-left: 30px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    color: #facc15; /* sun icon color */
+    color: #facc15;
 }
 
 body.light-theme .theme-toggle {
@@ -213,7 +436,7 @@ body.light-theme .theme-toggle {
 }
 
 .theme-toggle:hover {
-    transform: scale(1.05);
+    transform: scale(1.08) rotate(10deg);
     background: #334155;
 }
 
@@ -221,7 +444,13 @@ body.light-theme .theme-toggle:hover {
     background: #cbd5e1;
 }
 
-/* Responsive adjustments for toggle button */
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Responsive */
 @media(max-width:900px){
     .content{
         flex-direction:column-reverse;
@@ -241,47 +470,39 @@ body.light-theme .theme-toggle:hover {
     }
     nav ul{
         gap:20px;
-    }
-    .theme-toggle {
-        margin-left: 0;
-        margin-top: 10px;
-    }
-    .nav-right {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-    }
-}
-
-/* keep nav items aligned, add wrapper for theme button */
-.nav-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-/* adjustment for mobile: ensure layout remains consistent */
-@media (max-width: 900px) {
-    nav {
-        flex-direction: column;
-    }
-    .nav-wrapper {
-        margin-top: 5px;
+        flex-wrap: wrap;
         justify-content: center;
     }
     .theme-toggle {
         margin-left: 0;
     }
+    .nav-wrapper {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .left p {
+        max-width: 100%;
+    }
+    .btn1, .btn2 {
+        margin: 8px 6px;
+    }
 }
-
 </style>
 </head>
-<body class="dark-theme"> <!-- default dark theme (black background & blue accents) -->
+<body>
+
+<!-- PRELOADER ANIMATION -->
+<div class="preloader" id="preloader">
+    <div class="loader">
+        <div class="loader-circle"></div>
+        <div class="loader-text">IGNITING POWER</div>
+    </div>
+</div>
 
 <section class="hero">
 
     <nav>
-        <div class="logo">APEX ATHLETE</div>
+        <div class="logo">⚡ APEX ATHLETE</div>
         <div class="nav-wrapper">
             <ul>
                 <li>Home</li>
@@ -289,7 +510,6 @@ body.light-theme .theme-toggle:hover {
                 <li>Services</li>
                 <li>Contact</li>
             </ul>
-            <!-- Dark/Light theme toggle button -->
             <button class="theme-toggle" id="themeToggleBtn" aria-label="Switch theme">
                 🌙
             </button>
@@ -299,21 +519,23 @@ body.light-theme .theme-toggle:hover {
     <div class="content">
 
         <div class="left">
-            <h1>APEX ATHLETE</h1>
+            <h1 class="animate-left">APEX ATHLETE</h1>
 
-            <h3>Train Like A Champion</h3>
+            <h3 class="animate-left delay-1">Train Like A Champion</h3>
 
-            <p>
+            <p class="animate-left delay-2">
                 Improve your speed, endurance and athletic performance
                 with professional training programs designed for athletes.
             </p>
 
-            <button class="btn1">Get Started</button>
-            <button class="btn2">Learn More</button>
+            <div class="animate-left delay-3">
+                <button class="btn1">Get Started</button>
+                <button class="btn2">Learn More</button>
+            </div>
         </div>
 
-        <div class="right">
-            <img src="img/2201_w020_n001_1251a_p30_1251-removebg-preview.png" alt="Athlete illustration">
+        <div class="right animate-right">
+            <img class="animated-image" src="img/2201_w020_n001_1251a_p30_1251-removebg-preview.png" alt="Dynamic athlete illustration - Speed & Agility">
         </div>
 
     </div>
@@ -321,26 +543,48 @@ body.light-theme .theme-toggle:hover {
 </section>
 
 <script>
-    // THEME TOGGLE LOGIC: Switching between DARK (blue on black background) and LIGHT (clean blue/white)
-    // According to requirement: "add dark theme light theme changer button and transfer website colour to blue with black background"
-    // So by default we have black background with blue accents (dark mode). Clicking toggles to light theme with subtle blue/grey.
-    // I will use body class "light-theme" to switch.
-    
+    // ========== PRELOADER LOGIC + PAGE LOAD ANIMATION ==========
+    window.addEventListener('load', function() {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            setTimeout(() => {
+                preloader.classList.add('hide');
+                // after preloader hidden, ensure body scroll is visible
+                document.body.style.overflow = 'auto';
+            }, 1200); // show preloader for 1.2 sec for dramatic effect
+        }
+        
+        // additional: make sure any elements with opacity animation start properly
+        const animatedLefts = document.querySelectorAll('.animate-left, .animate-right');
+        animatedLefts.forEach(el => {
+            if (el.style.opacity !== '0') {
+                // ensure they get animation styles; pre-existing inline not required
+            }
+        });
+    });
+
+    // If there is any flash of preloader background, ensure final removal
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.body.style.overflow = 'auto';
+        }, 1300);
+    });
+
+    // ========== THEME TOGGLE LOGIC ==========
     const toggleBtn = document.getElementById('themeToggleBtn');
     const currentTheme = localStorage.getItem('apexTheme');
     
-    // Function to update button icon based on theme
     function updateButtonIcon(isLight) {
         if (isLight) {
-            toggleBtn.innerHTML = '☀️';   // Sun icon for light mode (indicating click to go dark)
+            toggleBtn.innerHTML = '☀️';
             toggleBtn.style.color = '#f59e0b';
         } else {
-            toggleBtn.innerHTML = '🌙';   // Moon icon for dark mode (click to go light)
+            toggleBtn.innerHTML = '🌙';
             toggleBtn.style.color = '#facc15';
         }
     }
     
-    // Apply theme
     function setTheme(themeName) {
         if (themeName === 'light') {
             document.body.classList.add('light-theme');
@@ -353,15 +597,12 @@ body.light-theme .theme-toggle:hover {
         }
     }
     
-    // Initialize theme based on localStorage or default dark (black background & blue)
     if (currentTheme === 'light') {
         setTheme('light');
     } else {
-        // default dark mode (blue with black background)
         setTheme('dark');
     }
     
-    // Toggle functionality
     toggleBtn.addEventListener('click', () => {
         const isLightTheme = document.body.classList.contains('light-theme');
         if (isLightTheme) {
@@ -371,16 +612,33 @@ body.light-theme .theme-toggle:hover {
         }
     });
     
-    // Bonus: add subtle hover effect for interactive elements consistency, but keeping original behavior.
-    // All original functionality (buttons, layout) remains unchanged besides color palette migration.
-    // The image src remains same path, no modifications.
-    // Also ensure that any unmodified elements adapt properly. 
-    // Additionally, any missing image fallback won't break layout.
-    // For robustness, if image fails to load, alt text appears but no other changes.
+    // Additional hover animations for image & visual enhancement
+    const heroImg = document.querySelector('.right img');
+    if (heroImg) {
+        heroImg.addEventListener('mouseenter', () => {
+            heroImg.style.transition = 'transform 0.25s';
+        });
+        heroImg.addEventListener('mouseleave', () => {
+            heroImg.style.transform = 'scale(1)';
+        });
+    }
     
-    // Optional: small console feedback for theme switch (non-intrusive)
-    console.log('Theme toggler ready — Blue & Black theme default, with light mode option');
+    // Add parallax or micro interactivity to buttons
+    const btns = document.querySelectorAll('.btn1, .btn2');
+    btns.forEach(btn => {
+        btn.addEventListener('mousedown', () => {
+            btn.style.transform = 'scale(0.97)';
+        });
+        btn.addEventListener('mouseup', () => {
+            btn.style.transform = 'translateY(-3px)';
+        });
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translateY(0)';
+        });
+    });
+    
+    // Console log theme status ready
+    console.log('🔥 APEX ATHLETE: Dynamic animations & theme toggler active | Image floating animation active');
 </script>
-
 </body>
 </html>
